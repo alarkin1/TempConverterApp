@@ -12,7 +12,7 @@ import javax.swing.UIManager;
  *
  * @author Alex
  */
-public class TempConverter {
+public class Startup {
 
     /**
      * @param args the command line arguments
@@ -23,7 +23,7 @@ public class TempConverter {
         } catch (Exception e) {
         }
         EventQueue.invokeLater(() -> {
-            new TempConverterGui();
+            new TempConverterGui().setVisible(true);
         });
     }
 }

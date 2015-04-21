@@ -15,6 +15,7 @@ public class TempConverterService {
 
     public static final String NON_NUMERIC_TEMP_ENTERED_ERROR_MESSAGE = "You entered a non-numeric!";
     public static final String NULL_TEMP_ENTERED_ERROR_MESSAGE = "Enter a numberic value!";
+    private TempFinder newTempFinderFactory = new TempFinder();
     private TempMeasurementStrategy fromTempType;
     private TempMeasurementStrategy toTempType;
     private double newTemp;
@@ -26,16 +27,12 @@ public class TempConverterService {
         newTemp = toTempType.convertTempFromCelsiusToThisType(fromTempType.convertTempFromThisTypeToCelsius(tempToConvert));
     }
 
-    public final void setFromTempType(TempMeasurementStrategy fromTempType) throws RuntimeException {
-        if (ValidationUtility.notNullValidate(fromTempType)) {
-            this.fromTempType = fromTempType;
-        }
+    public final void setFromTempType(TempEnum fromTempEnum) throws RuntimeException {
+        this.fromTempType = newTempFinderFactory.returnTempMeasurementOnTempEnum(fromTempEnum);
     }
 
-    public final void setToTempType(TempMeasurementStrategy toTempType) throws RuntimeException {
-        if (ValidationUtility.notNullValidate(toTempType)) {
-            this.toTempType = toTempType;
-        }
+    public final void setToTempType(TempEnum toTempEnum) throws RuntimeException {
+        this.toTempType = newTempFinderFactory.returnTempMeasurementOnTempEnum(toTempEnum);
     }
 
     public final String getToTempDescription() {
@@ -44,6 +41,10 @@ public class TempConverterService {
 
     public double getConvertedTemp() {
         return newTemp;
+    }
+
+    public void addNewTempMeasurementToTempFinderFactory(TempMeasurementStrategy newTempMeasurement) throws RuntimeException {
+        newTempFinderFactory.addTempMeasurementToMap(newTempMeasurement);
     }
 
 }

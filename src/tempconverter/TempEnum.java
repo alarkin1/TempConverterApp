@@ -9,7 +9,7 @@ package tempconverter;
  *
  * @author Alex
  */
-public enum TempEnums {
+public enum TempEnum {
     FAHRENHEIGHT,
     CELSIUS,
     KELVIN
