@@ -17,5 +17,4 @@ public interface TempMeasurementStrategy {
     
     public abstract String getTempDescription();
     
-    public abstract TempEnum getTempMeasurementEnum();
 }

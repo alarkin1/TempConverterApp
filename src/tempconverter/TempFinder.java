@@ -6,7 +6,6 @@
 package tempconverter;
 
 import java.util.Map;
-import validatorutil.*;
 
 /**
  *
@@ -17,21 +16,23 @@ public class TempFinder {
     private Map<TempEnum, TempMeasurementStrategy> mapOfTempMeasurementStrategy;
 
     public TempFinder(Map mapOfTempMeasurementStrategy) throws RuntimeException {
-        ValidationUtility.notNullValidate(mapOfTempMeasurementStrategy, "message!");
+        if (mapOfTempMeasurementStrategy == null) {
+            throw new NullPointerException("Message!");
+        }
         this.mapOfTempMeasurementStrategy = mapOfTempMeasurementStrategy;
     }
 
     public TempFinder() {
     }
 
-    public final TempMeasurementStrategy returnTempMeasurementOnTempEnum(TempEnum tempEnum) throws RuntimeException {
+    public final TempMeasurementStrategy returnTempMeasurementOnTempEnum(TempEnum tempEnum) throws RuntimeException{
+        if (tempEnum == null) {
+            throw new NullPointerException("Message!");
+        }
         TempMeasurementStrategy output = mapOfTempMeasurementStrategy.get(tempEnum);
-        ValidationUtility.notNullValidate(output, "message!");
+        if (output == null) {
+            throw new NullPointerException("Message!");
+        }
         return output;
-    }
-
-    public final void addTempMeasurementToMap(TempMeasurementStrategy tempMeasurementStrategy) throws RuntimeException {
-        ValidationUtility.notNullValidate(tempMeasurementStrategy, "message!");
-        mapOfTempMeasurementStrategy.put(tempMeasurementStrategy.getTempMeasurementEnum(), tempMeasurementStrategy);
     }
 }

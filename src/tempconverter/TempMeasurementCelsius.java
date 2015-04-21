@@ -12,7 +12,7 @@ package tempconverter;
 public class TempMeasurementCelsius implements TempMeasurementStrategy {
 
     private String description = " degrees Celsius";
-    private TempEnum measurementId = TempEnum.CELSIUS;
+
     @Override
     public double convertTempFromCelsiusToThisType(double tempToConvert) {
         return tempToConvert;
@@ -26,10 +26,5 @@ public class TempMeasurementCelsius implements TempMeasurementStrategy {
     @Override
     public String getTempDescription() {
         return description;
-    }
-
-    @Override
-    public TempEnum getTempMeasurementEnum() {
-       return measurementId;
     }
 }

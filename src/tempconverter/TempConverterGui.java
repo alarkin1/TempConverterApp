@@ -19,6 +19,7 @@ public class TempConverterGui extends javax.swing.JFrame {
      * Creates new form TempConverterGui
      */
     public TempConverterGui() {
+        this.setVisible(true);
         initComponents();
     }
 
@@ -93,8 +94,8 @@ public class TempConverterGui extends javax.swing.JFrame {
     private void convertTempBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertTempBtnActionPerformed
 
         try {
-            newConverterTempService.setFromTempType(TempEnum.CELSIUS);
-            newConverterTempService.setToTempType(TempEnum.FAHRENHEIGHT);
+            newConverterTempService.setFromTempType(new TempMeasurementCelsius());
+            newConverterTempService.setToTempType(new TempMeasurementFahrenheight());
             newConverterTempService.convertTempAndReturnConvertedTemp(tempInputTxt.getText());
             userFeedbackLbl.setForeground(Color.BLACK);
             userFeedbackLbl.setText(newConverterTempService.getConvertedTemp() + newConverterTempService.getToTempDescription());
