@@ -6,15 +6,17 @@
 package tempconverter;
 
 import java.util.LinkedHashMap;
-
+import validatorutil.*;
 /**
  *
  * @author Alex
  */
 public class TempMeasurementStrategyFactory {
 
-    public final TempMeasurementStrategy returnTempMeasurmentStrategyViaEnum(TempEnum tempEnum, LinkedHashMap<TempEnum, TempMeasurementStrategy> allTempMeasurementStrategies) throws RuntimeException{
-        
-        return null;
+    public final TempMeasurementStrategy returnTempMeasurmentStrategyViaEnum(TempEnum tempEnum, LinkedHashMap<TempEnum, TempMeasurementStrategy> allTempMeasurementStrategies) throws RuntimeException {
+        TempMeasurementStrategy output = allTempMeasurementStrategies.get(tempEnum);
+        System.out.println(allTempMeasurementStrategies);
+        ValidationUtility.notNullValidate(output, "Temperature Unsupported!");
+        return output;
     }
 }

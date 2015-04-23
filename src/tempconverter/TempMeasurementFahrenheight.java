@@ -21,7 +21,7 @@ public class TempMeasurementFahrenheight implements TempMeasurementStrategy{
 
     @Override
     public final double convertTempFromThisTypeToCelsius(double tempToConvertFrom) {
-        return (tempToConvertFrom * 5/9) + 32;
+        return (tempToConvertFrom - 32) * 5/9;
     }
 
     @Override

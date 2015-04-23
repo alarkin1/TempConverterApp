@@ -32,19 +32,16 @@ public class TempConverterService {
         ValidationUtility.notNullValidate(tempToConvertStr, NULL_TEMP_ENTERED_ERROR_MESSAGE);
         ValidationUtility.isDouble(tempToConvertStr, NON_NUMERIC_TEMP_ENTERED_ERROR_MESSAGE);
         double tempToConvert = Double.valueOf(tempToConvertStr);
+        System.out.println(toTempType);
         newTemp = toTempType.convertTempFromCelsiusToThisType(fromTempType.convertTempFromThisTypeToCelsius(tempToConvert));
     }
 
     public final void setFromTempType(TempEnum fromTempEnum) throws RuntimeException {
-        if (ValidationUtility.notNullValidate(fromTempType)) {
-            this.fromTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(fromTempEnum, mapOfAllTempMeasurements);
-        }
+        this.fromTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(fromTempEnum, mapOfAllTempMeasurements);
     }
 
     public final void setToTempType(TempEnum toTempEnum) throws RuntimeException {
-        if (ValidationUtility.notNullValidate(toTempType)) {
-            this.toTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(toTempEnum, mapOfAllTempMeasurements);
-        }
+        this.toTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(toTempEnum, mapOfAllTempMeasurements);
     }
 
     public final String getToTempDescription() {
