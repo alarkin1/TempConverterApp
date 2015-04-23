@@ -135,7 +135,6 @@ public class TempConverterGui extends javax.swing.JFrame {
             newConverterTempService.setFromTempType(fromTempEnum);
             newConverterTempService.setToTempType(toTempEnum);
             newConverterTempService.convertTempAndReturnConvertedTemp(tempInputTxt.getText());
-            System.out.println("fdsf");
             userFeedbackLbl.setForeground(Color.BLACK);
             userFeedbackLbl.setText(newConverterTempService.getConvertedTemp() + newConverterTempService.getToTempDescription());
         } catch (RuntimeException re) {

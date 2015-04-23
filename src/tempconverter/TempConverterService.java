@@ -6,6 +6,7 @@
 package tempconverter;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 import validatorutil.*;
 
 /**
@@ -55,5 +56,9 @@ public class TempConverterService {
     public final void addTempMeasurement(TempMeasurementStrategy newTempMeasurementStrategy) throws RuntimeException {
         ValidationUtility.notNullValidate(newTempMeasurementStrategy, NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE);
         mapOfAllTempMeasurements.put(newTempMeasurementStrategy.getTempEnumId(), newTempMeasurementStrategy);
+    }
+
+    public final Set<String> getAllStringIdsOfTempMeasurementStratObjects() {
+        return (Set)mapOfAllTempMeasurements.values();
     }
 }

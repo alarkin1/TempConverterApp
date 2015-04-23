@@ -13,6 +13,13 @@ public class TempMeasurementCelsius implements TempMeasurementStrategy {
 
     private TempEnum tempEnumId = TempEnum.CELSIUS;
     private String description = " degrees Celsius";
+    private String stringRepresntationOfStrategyObject;
+
+    public TempMeasurementCelsius() {
+        tempEnumId = TempEnum.CELSIUS;
+        description = " degrees Celsius";
+        stringRepresntationOfStrategyObject = "Celsius";
+    }
 
     @Override
     public final double convertTempFromCelsiusToThisType(double tempToConvert) {
@@ -32,5 +39,10 @@ public class TempMeasurementCelsius implements TempMeasurementStrategy {
     @Override
     public final TempEnum getTempEnumId() {
         return tempEnumId;
+    }
+
+    @Override
+    public final String toString() {
+        return stringRepresntationOfStrategyObject;
     }
 }
