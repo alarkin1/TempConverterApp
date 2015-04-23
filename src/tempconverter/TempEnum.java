@@ -10,7 +10,7 @@ package tempconverter;
  * @author Alex
  */
 public enum TempEnum {
-    FAHRENHEIGHT(),
-    CELSIUS(),
-    KELVIN()
+    FAHRENHEIGHT,
+    CELSIUS,
+    KELVIN
 }

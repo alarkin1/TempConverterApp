@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author Alex
  */
 public interface Subscriber {
-    public abstract void update(ArrayList<String> allComboBoxStrings);
+    public abstract void updateData(ArrayList<String> listOfStrings);
 }

@@ -5,12 +5,14 @@
  */
 package Observer;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Alex
  */
 public interface Publisher {
-    public abstract void addSubscriber();
-    public abstract void pushDataToObservers();
-    public abstract void removeSubsriber();
+    public abstract void addSubscriber(Subscriber subscriberToAdd);
+    public abstract void pushDataToObservers(ArrayList<String> arrayListOfStrings);
+    public abstract void removeSubsriber(Subscriber subscriberToRemove);
 }

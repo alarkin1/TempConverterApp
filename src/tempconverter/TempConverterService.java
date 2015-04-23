@@ -5,8 +5,9 @@
  */
 package tempconverter;
 
+import Observer.Publisher;
+import Observer.Subscriber;
 import java.util.LinkedHashMap;
-import java.util.Set;
 import validatorutil.*;
 
 /**
@@ -19,21 +20,24 @@ public class TempConverterService {
     public static final String NULL_TEMP_ENTERED_ERROR_MESSAGE = "Enter a numeric value!";
     public static final String NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE = "Cannot handle null TempMeasurement!";
     private double newTemp;
+    private Publisher customJComboBoxPublisher;
+    private TempMeasureArrayListToStringArrayListFactory tempMeasureArrayListToStringArrayListFactory;
     private LinkedHashMap<TempEnum, TempMeasurementStrategy> mapOfAllTempMeasurements;
     private TempMeasurementStrategyFactory tempMeasurementStrategyFactory;
     private TempMeasurementStrategy fromTempType;
     private TempMeasurementStrategy toTempType;
 
     public TempConverterService() {
+        tempMeasureArrayListToStringArrayListFactory = new TempMeasureArrayListToStringArrayListFactory();
         tempMeasurementStrategyFactory = new TempMeasurementStrategyFactory();
         mapOfAllTempMeasurements = new LinkedHashMap<>();
+        customJComboBoxPublisher = new CustomJComboBoxPublisher();
     }
 
     public final void convertTempAndReturnConvertedTemp(String tempToConvertStr) throws RuntimeException {
         ValidationUtility.notNullValidate(tempToConvertStr, NULL_TEMP_ENTERED_ERROR_MESSAGE);
         ValidationUtility.isDouble(tempToConvertStr, NON_NUMERIC_TEMP_ENTERED_ERROR_MESSAGE);
         double tempToConvert = Double.valueOf(tempToConvertStr);
-        System.out.println(toTempType);
         newTemp = toTempType.convertTempFromCelsiusToThisType(fromTempType.convertTempFromThisTypeToCelsius(tempToConvert));
     }
 
@@ -56,9 +60,20 @@ public class TempConverterService {
     public final void addTempMeasurement(TempMeasurementStrategy newTempMeasurementStrategy) throws RuntimeException {
         ValidationUtility.notNullValidate(newTempMeasurementStrategy, NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE);
         mapOfAllTempMeasurements.put(newTempMeasurementStrategy.getTempEnumId(), newTempMeasurementStrategy);
+        customJComboBoxPublisher.pushDataToObservers(tempMeasureArrayListToStringArrayListFactory.extractStringRepresntationsFromMap(mapOfAllTempMeasurements));
     }
 
-    public final Set<String> getAllStringIdsOfTempMeasurementStratObjects() {
-        return (Set)mapOfAllTempMeasurements.values();
+    public final void removeTempMeasurement(TempMeasurementStrategy newTempMeasurementStrategy) throws RuntimeException {
+        ValidationUtility.notNullValidate(newTempMeasurementStrategy, NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE);
+        mapOfAllTempMeasurements.remove(newTempMeasurementStrategy.getTempEnumId(), newTempMeasurementStrategy);
+        customJComboBoxPublisher.pushDataToObservers(tempMeasureArrayListToStringArrayListFactory.extractStringRepresntationsFromMap(mapOfAllTempMeasurements));
+    }
+
+    public final void addSubscriberToJComboBoxPublisher(Subscriber subscriber) {
+        customJComboBoxPublisher.addSubscriber(subscriber);
+    }
+
+    public final void removeSubscriberFromJComboBoxPublisher(Subscriber subscriber) {
+        customJComboBoxPublisher.removeSubsriber(subscriber);
     }
 }

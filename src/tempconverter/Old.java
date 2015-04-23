@@ -11,7 +11,7 @@ import java.awt.Color;
  *
  * @author Alex
  */
-public class TempConverterGui extends javax.swing.JFrame {
+public class Old extends javax.swing.JFrame {
 
     private TempConverterService newConverterTempService;
     private TempEnumFactory outputEnumFactory;
@@ -19,11 +19,12 @@ public class TempConverterGui extends javax.swing.JFrame {
     /**
      * Creates new form TempConverterGui
      */
-    public TempConverterGui() {
+    public Old() {
         newConverterTempService = new TempConverterService();
         outputEnumFactory = new TempEnumFactory();
         newConverterTempService.addTempMeasurement(new TempMeasurementCelsius());
         newConverterTempService.addTempMeasurement(new TempMeasurementFahrenheight());
+        //newConverterTempService.addSubscriberToJComboBoxPublisher();
         initComponents();
     }
 
@@ -41,8 +42,8 @@ public class TempConverterGui extends javax.swing.JFrame {
         tempInputTxt = new javax.swing.JTextField();
         convertTempBtn = new javax.swing.JButton();
         userFeedbackLbl = new javax.swing.JLabel();
-        tempFromComboBoxCB = new javax.swing.JComboBox();
-        tempToComboBoxCB = new javax.swing.JComboBox();
+        tempFromComboBoxCB = new CustomJComboBoxSubscriber();
+        tempToComboBoxCB = new CustomJComboBoxSubscriber();
         tempFromComboBoxLbl = new javax.swing.JLabel();
         tempToComboBoxLbl = new javax.swing.JLabel();
 
@@ -64,10 +65,8 @@ public class TempConverterGui extends javax.swing.JFrame {
         userFeedbackLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         tempFromComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tempFromComboBoxCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fahrenheight", "Celsius" }));
 
         tempToComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        tempToComboBoxCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fahrenheight", "Celsius" }));
 
         tempFromComboBoxLbl.setText("Temp To Convert From");
 
