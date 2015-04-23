@@ -7,6 +7,7 @@ package tempconverter;
 
 import java.awt.Color;
 import java.text.DecimalFormat;
+import java.awt.event.*;
 
 /**
  *
@@ -40,39 +41,29 @@ public class TemperatureConverterGui extends javax.swing.JFrame {
     private void initComponents() {
 
         userInputPnl = new javax.swing.JPanel();
-        tempInputLbl = new javax.swing.JLabel();
+        tempInputLbl = new javax.swing.JLabel("Enter Temp ");
         tempInputTxt = new javax.swing.JTextField();
-        convertTempBtn = new javax.swing.JButton();
+        convertTempBtn = new javax.swing.JButton("Convert To Fahrenheight");
         userFeedbackLbl = new javax.swing.JLabel();
         tempFromComboBoxCB = new CustomJComboBoxSubscriber();
         tempToComboBoxCB = new CustomJComboBoxSubscriber();
-        tempFromComboBoxLbl = new javax.swing.JLabel();
-        tempToComboBoxLbl = new javax.swing.JLabel();
+        tempFromComboBoxLbl = new javax.swing.JLabel("Temp To Convert From");
+        tempToComboBoxLbl = new javax.swing.JLabel("Temp To Convert To");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tempInputLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        tempInputLbl.setText("Enter Temp ");
-
         tempInputTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         convertTempBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        convertTempBtn.setText("Convert To Fahrenheight");
-        convertTempBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        userFeedbackLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        tempFromComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tempToComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        
+        convertTempBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 convertTempBtnActionPerformed(evt);
             }
         });
-
-        userFeedbackLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        tempFromComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        tempToComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-
-        tempFromComboBoxLbl.setText("Temp To Convert From");
-
-        tempToComboBoxLbl.setText("Temp To Convert To");
 
         javax.swing.GroupLayout userInputPnlLayout = new javax.swing.GroupLayout(userInputPnl);
         userInputPnl.setLayout(userInputPnlLayout);
@@ -126,7 +117,7 @@ public class TemperatureConverterGui extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void convertTempBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    private void convertTempBtnActionPerformed(ActionEvent evt) {
 
         try {
             String userFromTempChoice = tempFromComboBoxCB.getSelectedItem().toString();
@@ -148,7 +139,7 @@ public class TemperatureConverterGui extends javax.swing.JFrame {
         DecimalFormat tempFormatter = new DecimalFormat("#.00");
         return tempFormatter.format(tempToFormat);
     }
-    
+
     // Variables declaration - do not modify                     
     private javax.swing.JButton convertTempBtn;
     private CustomJComboBoxSubscriber tempFromComboBoxCB;

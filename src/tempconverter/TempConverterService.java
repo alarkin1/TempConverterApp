@@ -5,8 +5,7 @@
  */
 package tempconverter;
 
-import Observer.Publisher;
-import Observer.Subscriber;
+import Observer.*;
 import java.util.LinkedHashMap;
 import validatorutil.*;
 
