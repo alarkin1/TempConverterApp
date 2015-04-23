@@ -6,6 +6,7 @@
 package tempconverter;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -136,13 +137,18 @@ public class TemperatureConverterGui extends javax.swing.JFrame {
             newConverterTempService.setToTempType(toTempEnum);
             newConverterTempService.convertTempAndReturnConvertedTemp(tempInputTxt.getText());
             userFeedbackLbl.setForeground(Color.BLACK);
-            userFeedbackLbl.setText(newConverterTempService.getConvertedTemp() + newConverterTempService.getToTempDescription());
+            userFeedbackLbl.setText(formatTempOutput(newConverterTempService.getConvertedTemp()) + newConverterTempService.getToTempDescription());
         } catch (RuntimeException re) {
             userFeedbackLbl.setForeground(Color.red);
             userFeedbackLbl.setText(re.getMessage());
         }
     }
 
+    private String formatTempOutput(double tempToFormat) {
+        DecimalFormat tempFormatter = new DecimalFormat("#.00");
+        return tempFormatter.format(tempToFormat);
+    }
+    
     // Variables declaration - do not modify                     
     private javax.swing.JButton convertTempBtn;
     private CustomJComboBoxSubscriber tempFromComboBoxCB;
