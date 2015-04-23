@@ -13,13 +13,14 @@ import java.awt.Color;
  */
 public class TempConverterGui extends javax.swing.JFrame {
 
-    TempConverterService newConverterTempService = new TempConverterService();
-
+    private TempConverterService newConverterTempService;
+    private TempEnumFactory outputEnumFactory;
     /**
      * Creates new form TempConverterGui
      */
     public TempConverterGui() {
-        this.setVisible(true);
+        newConverterTempService = new TempConverterService();
+        outputEnumFactory = new TempEnumFactory();
         initComponents();
     }
 
@@ -32,11 +33,16 @@ public class TempConverterGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         userInputPnl = new javax.swing.JPanel();
         tempInputLbl = new javax.swing.JLabel();
         tempInputTxt = new javax.swing.JTextField();
         convertTempBtn = new javax.swing.JButton();
         userFeedbackLbl = new javax.swing.JLabel();
+        tempFromComboBoxCB = new javax.swing.JComboBox();
+        tempToComboBoxCB = new javax.swing.JComboBox();
+        tempFromComboBoxLbl = new javax.swing.JLabel();
+        tempToComboBoxLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,23 +61,38 @@ public class TempConverterGui extends javax.swing.JFrame {
 
         userFeedbackLbl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
+        tempFromComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tempFromComboBoxCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fahrenheight", "Celsius" }));
+
+        tempToComboBoxCB.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tempToComboBoxCB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Fahrenheight", "Celsius" }));
+
+        tempFromComboBoxLbl.setText("Temp To Convert From");
+
+        tempToComboBoxLbl.setText("Temp To Convert To");
+
         javax.swing.GroupLayout userInputPnlLayout = new javax.swing.GroupLayout(userInputPnl);
         userInputPnl.setLayout(userInputPnlLayout);
         userInputPnlLayout.setHorizontalGroup(
             userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userInputPnlLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(28, 28, 28)
                 .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(convertTempBtn)
                     .addGroup(userInputPnlLayout.createSequentialGroup()
                         .addComponent(tempInputLbl)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tempInputTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userFeedbackLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(userInputPnlLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(convertTempBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(userFeedbackLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                        .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tempFromComboBoxLbl)
+                            .addComponent(tempFromComboBoxCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tempToComboBoxCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tempToComboBoxLbl))))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         userInputPnlLayout.setVerticalGroup(
             userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,22 +101,37 @@ public class TempConverterGui extends javax.swing.JFrame {
                 .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tempInputLbl)
                     .addComponent(tempInputTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(convertTempBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(userFeedbackLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(userInputPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(userInputPnlLayout.createSequentialGroup()
+                        .addComponent(tempFromComboBoxLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tempFromComboBoxCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(userInputPnlLayout.createSequentialGroup()
+                        .addComponent(tempToComboBoxLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tempToComboBoxCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(userFeedbackLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
-        getContentPane().add(userInputPnl, java.awt.BorderLayout.PAGE_START);
+        getContentPane().add(userInputPnl, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void convertTempBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convertTempBtnActionPerformed
-
+        
         try {
-            newConverterTempService.setFromTempType(new TempMeasurementCelsius());
-            newConverterTempService.setToTempType(new TempMeasurementFahrenheight());
+            String userFromTempChoice = tempFromComboBoxCB.getSelectedItem().toString();
+            String userToTempChoice = tempToComboBoxCB.getSelectedItem().toString();
+            TempEnum fromTempEnum = outputEnumFactory.returnTempEnumViaStringParam(userFromTempChoice);
+            TempEnum toTempEnum = outputEnumFactory.returnTempEnumViaStringParam(userToTempChoice);
+            //newConverterTempService.setFromTempType(fromTempEnum);
+            //newConverterTempService.setToTempType(toTempEnum);
             newConverterTempService.convertTempAndReturnConvertedTemp(tempInputTxt.getText());
             userFeedbackLbl.setForeground(Color.BLACK);
             userFeedbackLbl.setText(newConverterTempService.getConvertedTemp() + newConverterTempService.getToTempDescription());
@@ -106,9 +142,14 @@ public class TempConverterGui extends javax.swing.JFrame {
     }//GEN-LAST:event_convertTempBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton convertTempBtn;
+    private javax.swing.JComboBox tempFromComboBoxCB;
+    private javax.swing.JLabel tempFromComboBoxLbl;
     private javax.swing.JLabel tempInputLbl;
     private javax.swing.JTextField tempInputTxt;
+    private javax.swing.JComboBox tempToComboBoxCB;
+    private javax.swing.JLabel tempToComboBoxLbl;
     private javax.swing.JLabel userFeedbackLbl;
     private javax.swing.JPanel userInputPnl;
     // End of variables declaration//GEN-END:variables

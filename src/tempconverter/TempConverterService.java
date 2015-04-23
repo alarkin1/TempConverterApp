@@ -5,6 +5,7 @@
  */
 package tempconverter;
 
+import java.util.LinkedHashMap;
 import validatorutil.*;
 
 /**
@@ -14,10 +15,18 @@ import validatorutil.*;
 public class TempConverterService {
 
     public static final String NON_NUMERIC_TEMP_ENTERED_ERROR_MESSAGE = "You entered a non-numeric!";
-    public static final String NULL_TEMP_ENTERED_ERROR_MESSAGE = "Enter a numberic value!";
+    public static final String NULL_TEMP_ENTERED_ERROR_MESSAGE = "Enter a numeric value!";
+    public static final String NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE = "Cannot handle null TempMeasurement!";
+    private double newTemp;
+    private LinkedHashMap<TempEnum, TempMeasurementStrategy> mapOfAllTempMeasurements;
+    private TempMeasurementStrategyFactory tempMeasurementStrategyFactory;
     private TempMeasurementStrategy fromTempType;
     private TempMeasurementStrategy toTempType;
-    private double newTemp;
+
+    public TempConverterService() {
+        tempMeasurementStrategyFactory = new TempMeasurementStrategyFactory();
+        mapOfAllTempMeasurements = new LinkedHashMap<>();
+    }
 
     public final void convertTempAndReturnConvertedTemp(String tempToConvertStr) throws RuntimeException {
         ValidationUtility.notNullValidate(tempToConvertStr, NULL_TEMP_ENTERED_ERROR_MESSAGE);
@@ -26,15 +35,15 @@ public class TempConverterService {
         newTemp = toTempType.convertTempFromCelsiusToThisType(fromTempType.convertTempFromThisTypeToCelsius(tempToConvert));
     }
 
-    public final void setFromTempType(TempMeasurementStrategy fromTempType) throws RuntimeException {
+    public final void setFromTempType(TempEnum fromTempEnum) throws RuntimeException {
         if (ValidationUtility.notNullValidate(fromTempType)) {
-            this.fromTempType = fromTempType;
+            this.fromTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(fromTempEnum, mapOfAllTempMeasurements);
         }
     }
 
-    public final void setToTempType(TempMeasurementStrategy toTempType) throws RuntimeException {
+    public final void setToTempType(TempEnum toTempEnum) throws RuntimeException {
         if (ValidationUtility.notNullValidate(toTempType)) {
-            this.toTempType = toTempType;
+            this.toTempType = tempMeasurementStrategyFactory.returnTempMeasurmentStrategyViaEnum(toTempEnum, mapOfAllTempMeasurements);
         }
     }
 
@@ -42,8 +51,12 @@ public class TempConverterService {
         return toTempType.getTempDescription();
     }
 
-    public double getConvertedTemp() {
+    public final double getConvertedTemp() {
         return newTemp;
     }
 
+    public final void addTempMeasurement(TempMeasurementStrategy newTempMeasurementStrategy) throws RuntimeException {
+        ValidationUtility.notNullValidate(newTempMeasurementStrategy, NULL_TEMP_STRAT_OBJ_ERROR_MESSAGE);
+        mapOfAllTempMeasurements.put(newTempMeasurementStrategy.getTempEnumId(), newTempMeasurementStrategy);
+    }
 }

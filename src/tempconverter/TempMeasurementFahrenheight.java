@@ -11,21 +11,27 @@ package tempconverter;
  */
 public class TempMeasurementFahrenheight implements TempMeasurementStrategy{
 
+    private TempEnum tempEnumId = TempEnum.FAHRENHEIGHT;
     private String description = " degrees Fahrenheight";
     
     @Override
-    public double convertTempFromCelsiusToThisType(double tempToConvertTo) {
+    public final double convertTempFromCelsiusToThisType(double tempToConvertTo) {
         return (tempToConvertTo  *  9/5) + 32;
     }
 
     @Override
-    public double convertTempFromThisTypeToCelsius(double tempToConvertFrom) {
+    public final double convertTempFromThisTypeToCelsius(double tempToConvertFrom) {
         return (tempToConvertFrom * 5/9) + 32;
     }
 
     @Override
-    public String getTempDescription() {
+    public final String getTempDescription() {
         return description;
+    }
+
+    @Override
+    public final TempEnum getTempEnumId() {
+        return tempEnumId;
     }
     
 }
