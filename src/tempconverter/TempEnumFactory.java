@@ -16,7 +16,7 @@ public class TempEnumFactory {
         try {
             output = TempEnum.valueOf(tempStr.toUpperCase());
         } catch (IllegalArgumentException iae) {
-            throw new IllegalArgumentException("message!");
+            throw new IllegalArgumentException(GlobalVarsAndFinals.UNHANDLED_TEMP_ERR_MESSAGE);
         }
         return output;
     }

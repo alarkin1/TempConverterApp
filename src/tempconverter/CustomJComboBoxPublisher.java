@@ -22,14 +22,14 @@ public class CustomJComboBoxPublisher implements Observer.Publisher {
 
     @Override
     public final void addSubscriber(Subscriber subscriberToAdd) throws RuntimeException{
-        validatorutil.ValidationUtility.notNullValidate(subscriberToAdd, "Null subscriber passed in to be added!");
+        validatorutil.ValidationUtility.notNullValidate(subscriberToAdd, GlobalVarsAndFinals.NULL_SUBSCRIBER_TO_BE_ADDED_ERR_MESSAGE);
         arrayListOfSubscribers.add(subscriberToAdd);
     }
 
     //No empty string check could be a good idea!  An empty String could be used for Flow Control inside of the Subscribers!
     @Override
     public final void pushDataToObservers(ArrayList<String> arrayListOfStrings) throws RuntimeException{
-        validatorutil.ValidationUtility.notNullValidate(arrayListOfStrings, "Null data to be pushed to subscribers!");
+        validatorutil.ValidationUtility.notNullValidate(arrayListOfStrings, GlobalVarsAndFinals.NULL_DATA_TO_BE_PUSHED_TO_SUBSCRIBERS);
         for (Subscriber subscriber : arrayListOfSubscribers) {
             subscriber.updateData(arrayListOfStrings);
         }
@@ -37,7 +37,7 @@ public class CustomJComboBoxPublisher implements Observer.Publisher {
 
     @Override
     public final void removeSubsriber(Subscriber subscriberToRemove) throws RuntimeException{
-        validatorutil.ValidationUtility.notNullValidate(subscriberToRemove, "Null subscriber passed in to be removed!");
+        validatorutil.ValidationUtility.notNullValidate(subscriberToRemove, GlobalVarsAndFinals.NULL_SUBSCRIBER_TO_BE_REMOVED_ERR_MESSAGE);
         arrayListOfSubscribers.remove(subscriberToRemove);
     }
 

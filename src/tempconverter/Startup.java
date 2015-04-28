@@ -23,7 +23,7 @@ public class Startup {
         } catch (Exception e) {
         }
         EventQueue.invokeLater(() -> {
-            new TemperatureConverterGui().setVisible(true);
+            new  TemperatureConverterGui().setVisible(true);
         });
     }
 }

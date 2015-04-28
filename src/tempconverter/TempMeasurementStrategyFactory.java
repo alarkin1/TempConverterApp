@@ -15,7 +15,7 @@ public class TempMeasurementStrategyFactory {
 
     public final TempMeasurementStrategy returnTempMeasurmentStrategyViaEnum(TempEnum tempEnum, LinkedHashMap<TempEnum, TempMeasurementStrategy> allTempMeasurementStrategies) throws RuntimeException {
         TempMeasurementStrategy output = allTempMeasurementStrategies.get(tempEnum);
-        ValidationUtility.notNullValidate(output, "Temperature Unsupported!");
+        ValidationUtility.notNullValidate(output, GlobalVarsAndFinals.UNHANDLED_TEMP_ERR_MESSAGE);
         return output;
     }
 }

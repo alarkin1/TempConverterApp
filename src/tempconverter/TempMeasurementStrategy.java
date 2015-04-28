@@ -13,7 +13,7 @@ public interface TempMeasurementStrategy {
 
     public abstract double convertTempFromCelsiusToThisType(double tempToConvertTo);
     
-    public abstract double convertTempFromThisTypeToCelsius(double tempToConvertFrom);
+    public abstract double convertTempFromThisTypeToCelsius(double tempToConvertFrom) throws RuntimeException;
     
     public abstract String getTempDescription();
     

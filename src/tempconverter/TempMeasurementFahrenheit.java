@@ -9,28 +9,27 @@ package tempconverter;
  *
  * @author Alex
  */
-public class TempMeasurementCelsius implements TempMeasurementStrategy {
+public class TempMeasurementFahrenheit implements TempMeasurementStrategy {
 
     private TempEnum tempEnumId;
     private String description;
     private String stringRepresntationOfStrategyObject;
 
-    public TempMeasurementCelsius() {
-        tempEnumId = TempEnum.CELSIUS;
-        description = " degrees Celsius";
-        stringRepresntationOfStrategyObject = "Celsius";
+    public TempMeasurementFahrenheit() {
+        tempEnumId = TempEnum.FAHRENHEIT;
+        description = " degrees Fahrenheit";
+        stringRepresntationOfStrategyObject = "Fahrenheit";
     }
 
     @Override
-    public final double convertTempFromCelsiusToThisType(double tempCelsius) throws RuntimeException {
-        if (tempCelsius < GlobalVarsAndFinals.ABSOLUTE_ZERO_CELSIUS) {
-            throw new RuntimeException(GlobalVarsAndFinals.BELOW_ABSOLUTE_ZERO_ERR_MESSAGE);
-        }
-        return tempCelsius;
+    public final double convertTempFromCelsiusToThisType(double tempToThisType) {
+        return (tempToThisType * 9 / 5) + 32;
     }
 
     @Override
-    public final double convertTempFromThisTypeToCelsius(double tempCelsius) throws RuntimeException {
+    public final double convertTempFromThisTypeToCelsius(double tempFahrenheit) throws RuntimeException {
+        double tempCelsius = 0;
+        tempCelsius = (tempFahrenheit - 32) * 5 / 9;
         if (tempCelsius < GlobalVarsAndFinals.ABSOLUTE_ZERO_CELSIUS) {
             throw new RuntimeException(GlobalVarsAndFinals.BELOW_ABSOLUTE_ZERO_ERR_MESSAGE);
         }
@@ -51,4 +50,5 @@ public class TempMeasurementCelsius implements TempMeasurementStrategy {
     public final String toString() {
         return stringRepresntationOfStrategyObject;
     }
+
 }
